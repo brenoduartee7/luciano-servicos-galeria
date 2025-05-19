@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation, Navigate } from 'react-router-dom';
-import { Home, Upload, Gallery, LogOut } from 'lucide-react';
+import { Home, Upload, Images, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 interface AdminLayoutProps {
@@ -21,7 +21,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const adminLinks = [
     { name: 'Dashboard', path: '/admin', icon: Home },
     { name: 'Upload de Imagens', path: '/admin/upload', icon: Upload },
-    { name: 'Gerenciar Galeria', path: '/admin/galeria', icon: Gallery },
+    { name: 'Gerenciar Galeria', path: '/admin/galeria', icon: Images },
   ];
 
   const handleLogout = () => {

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
-import { Electric, Wrench, Home, Plumbing } from 'lucide-react';
+import { Wrench, Home, Hammer, Zap, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
@@ -21,7 +21,7 @@ const Services = () => {
       ],
     },
     {
-      icon: Electric,
+      icon: Zap,
       title: 'Elétrica',
       description: 'Instalações e reparos elétricos residenciais e comerciais com segurança.',
       items: [
@@ -47,7 +47,7 @@ const Services = () => {
       ],
     },
     {
-      icon: Plumbing,
+      icon: Droplets,
       title: 'Hidráulica',
       description: 'Conserto de bombas d\'água e reparos em sistemas hidráulicos.',
       items: [

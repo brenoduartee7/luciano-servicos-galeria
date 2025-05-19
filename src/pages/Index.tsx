@@ -2,7 +2,7 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Electric, Wrench, Home, Plumbing } from 'lucide-react';
+import { ArrowRight, Wrench, Home, Hammer, Zap, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
@@ -14,7 +14,7 @@ const Index = () => {
       description: 'Soluções completas para sua casa ou empresa com qualidade e agilidade.',
     },
     {
-      icon: Electric,
+      icon: Zap,
       title: 'Elétrica',
       description: 'Instalações e reparos elétricos residenciais e comerciais com segurança.',
     },
@@ -24,7 +24,7 @@ const Index = () => {
       description: 'Serviços de pedreiro, pisos, rejuntes e reformas para renovar seu espaço.',
     },
     {
-      icon: Plumbing,
+      icon: Droplets,
       title: 'Hidráulica',
       description: 'Conserto de bombas d\'água e reparos em sistemas hidráulicos.',
     },
