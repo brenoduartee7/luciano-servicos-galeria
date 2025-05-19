@@ -34,9 +34,25 @@ const AdminGallery = () => {
   useEffect(() => {
     const loadImages = () => {
       try {
+        console.log('Carregando imagens do localStorage');
         const savedImages = localStorage.getItem('gallery_images');
+        
         if (savedImages) {
-          const parsedImages = JSON.parse(savedImages);
+          let parsedImages: GalleryImage[] = [];
+          
+          try {
+            parsedImages = JSON.parse(savedImages);
+            console.log('Imagens carregadas:', parsedImages);
+            
+            if (!Array.isArray(parsedImages)) {
+              console.warn('Os dados carregados não são um array:', parsedImages);
+              parsedImages = [];
+            }
+          } catch (parseError) {
+            console.error('Erro ao analisar dados do localStorage:', parseError);
+            parsedImages = [];
+          }
+          
           // Ordenar por data mais recente
           const sortedImages = parsedImages.sort((a: GalleryImage, b: GalleryImage) => 
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -44,6 +60,7 @@ const AdminGallery = () => {
           setImages(sortedImages);
           setFilteredImages(sortedImages);
         } else {
+          console.log('Nenhuma imagem encontrada no localStorage');
           setImages([]);
           setFilteredImages([]);
         }

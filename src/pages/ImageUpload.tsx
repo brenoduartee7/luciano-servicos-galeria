@@ -94,23 +94,41 @@ const ImageUpload = () => {
     
     try {
       // Em uma aplicação real, aqui teria o upload para um backend
-      // Por enquanto, vamos simular e salvar no localStorage
-      
       // Simular um delay do upload
       await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Garantir que temos acesso à preview da imagem
+      if (!selectedImage.preview) {
+        throw new Error('Preview da imagem não disponível');
+      }
       
       // Criar a entrada da imagem
       const newImage: GalleryImage = {
         id: uuidv4(),
-        title,
-        description,
-        url: selectedImage.preview, // Numa aplicação real, seria a URL retornada do servidor
+        title: title.trim(),
+        description: description.trim(),
+        url: selectedImage.preview, // No localStorage, salvamos o dataURL
         createdAt: new Date().toISOString()
       };
       
+      console.log('Salvando imagem:', newImage);
+      
       // Salvar no localStorage
+      let imagesArray: GalleryImage[] = [];
       const existingImages = localStorage.getItem('gallery_images');
-      const imagesArray = existingImages ? JSON.parse(existingImages) : [];
+      
+      if (existingImages) {
+        try {
+          imagesArray = JSON.parse(existingImages);
+          if (!Array.isArray(imagesArray)) {
+            imagesArray = [];
+          }
+        } catch (parseError) {
+          console.error('Erro ao analisar dados do localStorage:', parseError);
+          imagesArray = [];
+        }
+      }
+      
       imagesArray.push(newImage);
       localStorage.setItem('gallery_images', JSON.stringify(imagesArray));
       
@@ -123,12 +141,12 @@ const ImageUpload = () => {
       // Limpar o formulário
       clearSelectedImage();
     } catch (error) {
+      console.error('Erro ao fazer upload:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao fazer upload',
         description: 'Ocorreu um erro ao enviar a imagem. Tente novamente.'
       });
-      console.error('Erro ao fazer upload:', error);
     } finally {
       setIsUploading(false);
     }
